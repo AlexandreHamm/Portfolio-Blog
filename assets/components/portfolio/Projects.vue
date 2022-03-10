@@ -1,46 +1,82 @@
+<script>
+export default {
+  mounted: function(){
+    this.ifProjectVisible();
+  },
+  methods: {
+    ifProjectVisible() {
+      document.querySelector('.portfolio__block__projects__scroll').addEventListener('scroll', function() {
+        document.querySelectorAll('.portfolio__block__projects__scroll__wrapper__item').forEach( (element) => {
+          let position = element.getBoundingClientRect();
+          let container = document.querySelector('.portfolio__block__projects__scroll').getBoundingClientRect();
+
+          if(position.left <= container.right || position.right <= container.left) {
+            if(!element.classList.contains('active')){
+              element.animate([{
+                transform: 'translateX(-240%) translateY(100%)',
+                opacity: '0'
+              },
+              {
+                transform: 'translateX(-240%) translateY(0)',
+                opacity: '.5'
+              }],
+              {
+                duration: 500,
+                easing: 'ease-out',
+              });
+            }
+            element.classList.add('active');
+          }else{
+            if(element.classList.contains('active')){
+              element.classList.remove('active');
+            }
+          }
+        });
+      });
+    }
+  }
+}
+</script>
+
 <template>
-  <main class="portfolio__block__projects">
-    <div class="portfolio__block__projects__scroll">
-      <div class="portfolio__block__projects__scroll__wrapper">
-        <div class="portfolio__block__projects__scroll__wrapper__item">
-            <input type="checkbox" name="projectname" id="projectname">
-            <label for="projectname" class="projects__wrapper">
-              <img src="../../projects/site1.jpg" alt="" draggable="false">
-            </label>
-        </div>
-        <div class="portfolio__block__projects__scroll__wrapper__item">
-            <input type="checkbox" name="projectname" id="projectname">
-            <label for="projectname" class="projects__wrapper">
-              <img src="../../projects/site2.jpg" alt="" draggable="false">
-            </label>
-        </div>
-        <div class="portfolio__block__projects__scroll__wrapper__item">
-            <input type="checkbox" name="projectname" id="projectname">
-            <label for="projectname" class="projects__wrapper">
-              <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-            </label>
-        </div>
-        <div class="portfolio__block__projects__scroll__wrapper__item">
-            <input type="checkbox" name="projectname" id="projectname">
-            <label for="projectname" class="projects__wrapper">
-              <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-            </label>
-        </div>
-        <div class="portfolio__block__projects__scroll__wrapper__item">
-            <input type="checkbox" name="projectname" id="projectname">
-            <label for="projectname" class="projects__wrapper">
-              <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-            </label>
-        </div>
-        <div class="portfolio__block__projects__scroll__wrapper__item">
-            <input type="checkbox" name="projectname" id="projectname">
-            <label for="projectname" class="projects__wrapper">
-              <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-            </label>
-        </div>
-      </div>
+  <div class="portfolio__block__projects__scroll__wrapper">
+    <div class="portfolio__block__projects__scroll__wrapper__item">
+        <input type="checkbox" name="projectname" id="projectname">
+        <label for="projectname" class="projects__wrapper">
+          <img src="../../projects/site1.jpg" alt="" draggable="false">
+        </label>
     </div>
-  </main>
+    <div class="portfolio__block__projects__scroll__wrapper__item">
+        <input type="checkbox" name="projectname" id="projectname">
+        <label for="projectname" class="projects__wrapper">
+          <img src="../../projects/site2.jpg" alt="" draggable="false">
+        </label>
+    </div>
+    <div class="portfolio__block__projects__scroll__wrapper__item">
+        <input type="checkbox" name="projectname" id="projectname">
+        <label for="projectname" class="projects__wrapper">
+          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
+        </label>
+    </div>
+    <div class="portfolio__block__projects__scroll__wrapper__item">
+        <input type="checkbox" name="projectname" id="projectname">
+        <label for="projectname" class="projects__wrapper">
+          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
+        </label>
+    </div>
+    <div class="portfolio__block__projects__scroll__wrapper__item">
+        <input type="checkbox" name="projectname" id="projectname">
+        <label for="projectname" class="projects__wrapper">
+          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
+        </label>
+    </div>
+    <div class="portfolio__block__projects__scroll__wrapper__item">
+        <input type="checkbox" name="projectname" id="projectname">
+        <label for="projectname" class="projects__wrapper">
+          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
+        </label>
+    </div>
+  </div> 
 </template>
 
 <style lang="scss" scoped>
@@ -51,28 +87,16 @@
     &__block{
 
       &__projects{
-        position: relative;
-        width: 50%;
-        height: 150px;
 
         &__scroll{
-          position: relative;
-          width: 150px;
-          height: 24vw;
-          overflow-y: scroll;
-          overflow-x: hidden;
-          transform: rotate(-90deg) translateX(-15rem);
-          transform-origin: top left;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          scroll-snap-type: y mandatory;
 
           &__wrapper{
             position: absolute;
             bottom: 0;
             height: 150px;
             width: auto;
-            transform: rotate(90deg);
+            transform: rotate(90deg) translateX(50%);
             transform-origin: center;
             display: flex;
             justify-content: center;
@@ -80,19 +104,31 @@
 
             &__item{
               width: 50px;
-              height: 85px;
+              height: 80px;
               margin: 0 1rem 0 0;
               overflow: hidden;
               opacity: .5;
-              transition: .2s;
+              transition: height .2s ease-out;
               background: #fff;
               filter: grayscale(1);
+              transform: translate(-240%, 0);
+              
+              &.default{
+                opacity: .5;
+                transform: translate(-240%, 150px);
+              }
 
               & > label{
                 width: 100%;
                 height: 100%;
                 display: flex;
                 justify-content: center;
+                cursor: pointer;
+
+                &:checked{
+                  width: 100vw;
+                  height: 100vh;
+                }
 
                 & > img{
                   height: 100%;

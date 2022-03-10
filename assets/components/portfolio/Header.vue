@@ -1,6 +1,18 @@
+<script>
+export default {
+  computed: {
+    checkURL(){
+      return window.location.href.indexOf("dashboard") == -1;
+    }
+  }
+}
+</script>
+
 <template>
-  <header class="portfolio__block__header">
-    <h1 class="portfolio__block__header__title">hamm</h1>
+  <header class="portfolio__block__header" v-if='checkURL'>
+    <h1 class="portfolio__block__header__title">
+      <span>hamm</span> 
+    </h1>
   </header>
 </template>
 
@@ -20,6 +32,10 @@
         justify-content: flex-end;
         align-items: center;
         cursor: default;
+        overflow: hidden;
+        transition: 2s ease-out;
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+        transform: translateX(50%);
 
         &__title{
           margin: 0 5rem;
@@ -29,7 +45,7 @@
           font-family: 'Blackout';
           color: #FFF;
           opacity: .5;
-          transition: .3s;
+          transition: .2s;
 
           &:hover{
             opacity: 1;

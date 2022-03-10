@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Linerama';
+  src: url('./fonts/linerama.ttf');
+}
+
 *,
 *::before,
 *::after {
@@ -11,7 +16,7 @@
 
 :root{
   font-size: 10px;
-  font-family: 'Freight';
+  font-family: 'Linerama';
 }
 
 ::-webkit-scrollbar{
