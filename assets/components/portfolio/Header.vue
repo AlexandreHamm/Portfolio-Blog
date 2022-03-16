@@ -11,7 +11,10 @@ export default {
 <template>
   <header class="portfolio__block__header" v-if='checkURL'>
     <h1 class="portfolio__block__header__title">
-      <span>hamm</span> 
+      <span>h</span>
+      <span>a</span>
+      <span>m</span>
+      <span>m</span>
     </h1>
   </header>
 </template>
@@ -33,8 +36,7 @@ export default {
         align-items: center;
         cursor: default;
         overflow: hidden;
-        transition: 2s ease-out;
-        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+        transition: 2s cubic-bezier(.64,.82,.61,1);
         transform: translateX(50%);
 
         &__title{
@@ -46,6 +48,16 @@ export default {
           color: #FFF;
           opacity: .5;
           transition: .2s;
+          display: flex;
+          overflow: hidden;
+
+          & > span{
+            transform: translateY(150%);
+            transition: transform 1s ease-out;
+          }
+          & > span:nth-child(even){
+            transform: translateY(-150%);
+          }
 
           &:hover{
             opacity: 1;

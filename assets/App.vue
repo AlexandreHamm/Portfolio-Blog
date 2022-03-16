@@ -5,21 +5,30 @@ import Links from './components/Links.vue'
 import Socials from './components/Socials.vue'
 
 window.onload = function(){
-  document.querySelector('.portfolio__block__header').style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0% 100%)";
   if(window.location.href.indexOf('dashboard') == -1 || window.location.href.indexOf('blog') == -1){
+    document.querySelectorAll('.portfolio__block__header__title > span').forEach((el, i) => {
+      setTimeout(() => {
+        el.style.transform = "translateY(0)";
+      }, i * 200);
+    })
     setTimeout(() => {
       document.querySelector('.portfolio__block__header').style.transition = ".5s ease-out";
       setTimeout(() => {
         document.querySelector('.portfolio__block__header').style.transform = "translateX(0)";
       }, 300)
-    }, 1400)
+    }, 1700)
 
     setTimeout(() => {
-      document.querySelectorAll('.socials > *').forEach((el) => {
-        el.style.transform = "translateY(0)";
-      });
-      document.querySelector('.links > a').style.transform = "translateY(0)";
-    }, 2200);
+      document.querySelector('.socials > a').style.transform = "translateY(0)";
+      setTimeout(() => {
+        document.querySelectorAll('.socials__links > a').forEach((el, i) => {
+          setTimeout(() => {
+            el.style.transform = "translateY(0)";
+          }, i * 200);
+        });
+      }, 500);
+      // document.querySelector('.links > a').style.transform = "translateY(0)";
+    }, 1900);
     
     setTimeout(() => {
       document.querySelector('.portfolio__block__projects').style.display = "block";
@@ -44,7 +53,7 @@ window.onload = function(){
           }, i * 300)
         }
       })
-    }, 2500);
+    }, 2200);
   }
 }
 </script>
@@ -58,7 +67,7 @@ window.onload = function(){
       </div>
       <Socials />
     </div>
-    <Links />
+    <!-- <Links /> -->
   </section>
 </template>
 

@@ -1,6 +1,13 @@
 <script>
 export default {
-    name: 'Socials'
+    computed: {
+        notOnContactView(){
+            return window.location.href.indexOf("contact") != -1;
+        },
+        onContactView(){
+            return window.location.href.indexOf("contact") == -1;
+        }
+    }
 }
 </script>
 
@@ -27,20 +34,14 @@ export default {
 <style lang="scss" scoped>
     .socials{
         position: absolute;
-        bottom: 4%;
+        bottom: 2%;
         width: 100%;
-        height: 50px;
+        height: calc(50px + 2%);
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        // clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
         overflow: hidden;
-        
-        & > *{
-            transform: translateY(150px);
-            transition: 1.2s ease-out;
-        }
 
         & > a{
             font-family: inherit;
@@ -48,7 +49,8 @@ export default {
             font-weight: 500;
             letter-spacing: .5rem;
             opacity: .5;
-            transition: .2s;
+            transform: translateY(150px);
+            transition: opacity .2s, letter-spacing .2s, transform 1s ease-out;
 
             &:hover{
                 letter-spacing: .7rem;
@@ -61,15 +63,18 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+
             & > a{
                 width: 50px;
                 height: 40px;
-                opacity: .5;
-                transition: .2s;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                transform: translateY(150px);
+                opacity: .5;
+                transition: opacity .2s, transform 1.2s ease-out;
 
                 & > svg{
                     width: 15px;

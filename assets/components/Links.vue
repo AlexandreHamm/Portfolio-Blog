@@ -26,7 +26,7 @@
             font-weight: 500;
             letter-spacing: .5rem;
             opacity: .5;
-            transition: .2s;
+            transition: opacity .2s, letter-spacing .2s, transform 1s ease-out;
             transform: translateY(150px);
 
             & > svg{
