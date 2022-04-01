@@ -41,7 +41,7 @@ window.onload = function(){
           }, i * 200);
         });
       }, 500);
-      // document.querySelector('.links > a').style.transform = "translateY(0)";
+      document.querySelector('.links > a').style.transform = "translateY(0)";
     }, 1900);
   }
 }
@@ -56,7 +56,7 @@ window.onload = function(){
       </div>
       <Socials />
     </div>
-    <!-- <Links /> -->
+    <Links />
   </section>
 </template>
 
@@ -92,6 +92,7 @@ section{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    overflow: hidden;
   }
 }
 </style>

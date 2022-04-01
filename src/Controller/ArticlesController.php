@@ -9,7 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 #[Route('/dashboard/articles')]
 class ArticlesController extends AbstractController
@@ -20,6 +23,15 @@ class ArticlesController extends AbstractController
         return $this->render('articles/index.html.twig', [
             'articles' => $articlesRepository->findAll(),
         ]);
+    }
+
+    #[Route('/api', name: 'articles_api', methods: ['GET'])]
+    public function api(SerializerInterface $serializer, ArticlesRepository $projectsRepository): JsonResponse
+    {
+        $articles = $projectsRepository->findAll();
+        $data = $serializer->serialize($articles, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_OK, [], true);
     }
 
     #[Route('/new', name: 'articles_new', methods: ['GET', 'POST'])]

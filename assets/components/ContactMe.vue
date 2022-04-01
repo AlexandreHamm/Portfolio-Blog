@@ -1,19 +1,25 @@
 <script>
+import { useRoute } from 'vue-router';
+
 export default {
     mounted(){
-        this.test()
+        this.btnSwitch()
     },
     methods: {
-        test(){
+        btnSwitch(){
             setTimeout(() => {
-                if(window.location.href.indexOf('contact') != -1){
-                    this.route = '/',
+                if(this.$route.name == 'Contact' || window.location.href.indexOf('contact') != -1){
+                    if(window.history.state.back != null){
+                        this.route = window.history.state.back
+                    }else{
+                        this.route = '/'
+                    }
                     this.html = 'back'
                 }else{
-                    this.route = '/contact',
-                    this.html = 'contact me'
+                    this.html = 'contact me',
+                    this.route = '/contact'
                 }
-            }, 10);
+            }, 100);
         }
     },
     data() {
@@ -26,5 +32,5 @@ export default {
 </script>
 
 <template>
-    <RouterLink @click='test()' :to="route"> {{ html }} </RouterLink>
+    <RouterLink @click='btnSwitch()' :to="route">{{ html }}</RouterLink>
 </template>

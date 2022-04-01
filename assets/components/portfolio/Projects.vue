@@ -1,30 +1,57 @@
 <script>
+import { ref, onMounted } from "vue";
 export default {
-  mounted: function(){
-    this.ifProjectVisible();
+  setup() {
+    const data = ref(null);
 
-      document.querySelector('.portfolio__block__projects').style.display = "block";
-      document.querySelectorAll('.portfolio__block__projects__scroll__wrapper__item').forEach((el, i) => {
-        if(el.getBoundingClientRect().left <= document.querySelector('.portfolio__block__projects__scroll').getBoundingClientRect().right || el.getBoundingClientRect().right <= document.querySelector('.portfolio__block__projects__scroll').getBoundingClientRect().left){
-          el.classList.add('active');
-          el.classList.add('default');
-          setTimeout(() => {
-          el.animate([{
-              transform: 'translateX(-240%) translateY(150px)',
-              opacity: '0'
-            },
-            {
-              transform: 'translateX(-240%) translateY(0)',
-              opacity: '.5'
-            }],
-            {
-              duration: 500,
-              easing: 'ease-out',
-            });
-            el.classList.remove('default');
-          }, i * 300)
+    function fetchData() {
+        return fetch('/dashboard/projects/api', {
+        method: 'get',
+        headers: {
+          'content-type': 'application/json'
         }
       })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        data.value = json;
+      })
+    }
+
+    onMounted(() => {
+      fetchData();
+    });
+
+    return {
+      data,
+    };
+  },
+  mounted(){
+    this.ifProjectVisible();
+
+    document.querySelector('.portfolio__block__projects').style.display = "block";
+    document.querySelectorAll('.portfolio__block__projects__scroll__wrapper__item').forEach((el, i) => {
+      if(el.getBoundingClientRect().left <= document.querySelector('.portfolio__block__projects__scroll').getBoundingClientRect().right || el.getBoundingClientRect().right <= document.querySelector('.portfolio__block__projects__scroll').getBoundingClientRect().left){
+        el.classList.add('active');
+        el.classList.add('default');
+        setTimeout(() => {
+        el.animate([{
+            transform: 'translateX(-240%) translateY(150px)',
+            opacity: '0'
+          },
+          {
+            transform: 'translateX(-240%) translateY(0)',
+            opacity: '.5'
+          }],
+          {
+            duration: 500,
+            easing: 'ease-out',
+          });
+          el.classList.remove('default');
+        }, i * 300)
+      }
+    })
   },
   methods: {
     ifProjectVisible() {
@@ -62,44 +89,14 @@ export default {
 </script>
 
 <template>
-  <div class="portfolio__block__projects__scroll__wrapper">
-    <div class="portfolio__block__projects__scroll__wrapper__item">
+  <ul class="portfolio__block__projects__scroll__wrapper" v-if="data && data.length">
+    <li class="portfolio__block__projects__scroll__wrapper__item" v-for="project of data" :key="project.id">
         <input type="checkbox" name="projectname" id="projectname">
         <label for="projectname" class="projects__wrapper">
           <img src="../../projects/site1.jpg" alt="" draggable="false">
         </label>
-    </div>
-    <div class="portfolio__block__projects__scroll__wrapper__item">
-        <input type="checkbox" name="projectname" id="projectname">
-        <label for="projectname" class="projects__wrapper">
-          <img src="../../projects/site2.jpg" alt="" draggable="false">
-        </label>
-    </div>
-    <div class="portfolio__block__projects__scroll__wrapper__item">
-        <input type="checkbox" name="projectname" id="projectname">
-        <label for="projectname" class="projects__wrapper">
-          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-        </label>
-    </div>
-    <div class="portfolio__block__projects__scroll__wrapper__item">
-        <input type="checkbox" name="projectname" id="projectname">
-        <label for="projectname" class="projects__wrapper">
-          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-        </label>
-    </div>
-    <div class="portfolio__block__projects__scroll__wrapper__item">
-        <input type="checkbox" name="projectname" id="projectname">
-        <label for="projectname" class="projects__wrapper">
-          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-        </label>
-    </div>
-    <div class="portfolio__block__projects__scroll__wrapper__item">
-        <input type="checkbox" name="projectname" id="projectname">
-        <label for="projectname" class="projects__wrapper">
-          <!-- <img src="https://www.a2mo.fr/wp-content/uploads/2021/10/placeholder1.png" alt="" draggable="false"> -->
-        </label>
-    </div>
-  </div> 
+    </li>
+  </ul> 
 </template>
 
 <style lang="scss" scoped>
