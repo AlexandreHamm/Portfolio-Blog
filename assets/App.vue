@@ -8,29 +8,23 @@ export default {
   mounted(){
     setTimeout(() => {
       this.isLoaded = true
-    }, 2000)
+
+    }, 1000)
   },
 }
 </script>
 <script setup>
-import Header from './components/portfolio/Header.vue'
-import Links from './components/Links.vue'
-import Socials from './components/Socials.vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 window.onload = function(){
 
   if(window.location.href.indexOf('dashboard') == -1 && window.location.href.indexOf('blog') == -1){
-    document.querySelectorAll('.portfolio__block__header__title > span').forEach((el, i) => {
+    document.querySelectorAll('.title > span').forEach((el, i) => {
       setTimeout(() => {
         el.style.transform = "translateY(0)";
       }, i * 200);
     })
-    setTimeout(() => {
-      document.querySelector('.portfolio__block__header').style.transition = ".5s ease-out";
-      setTimeout(() => {
-        document.querySelector('.portfolio__block__header').style.transform = "translateX(0)";
-      }, 300)
-    }, 1700)
 
     setTimeout(() => {
       document.querySelector('.socials > a').style.transform = "translateY(0)";
@@ -41,26 +35,26 @@ window.onload = function(){
           }, i * 200);
         });
       }, 500);
-      document.querySelector('.links > a').style.transform = "translateY(0)";
     }, 1900);
   }
 }
 </script>
 
 <template>
-  <section>
-    <div class="portfolio">
-      <div class="portfolio__block">
-        <Header />
-        <RouterView v-if="isLoaded" />
-      </div>
-      <Socials />
-    </div>
-    <Links />
-  </section>
+  <main>
+    <Header />
+    <section class="container">
+      <RouterView v-if="isLoaded" v-slot="{ Component }">
+        <Transition name="clip" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </RouterView>
+    </section>
+    <Footer />
+  </main>
 </template>
 
-<style lang="scss">
+<style>
 
 #app{
   width: 100%;
@@ -70,29 +64,41 @@ window.onload = function(){
   align-items: center;
   overflow: hidden;
 }
-section{
+main{
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
-.portfolio{
-  position: relative;
-  width: 64%;
-  height: 100%;
+.container{
+  width: 100%;
+  height: calc(100% - 220px);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  &__block{
-    width: 100%;
-    height: 40%;
-    margin: 2rem 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    overflow: hidden;
+  overflow-y: scroll;
+}
+
+.clip-enter-active {
+  animation: clip-in 1s ease-out;
+}
+.clip-leave-active {
+  animation: clip-in 1s ease-out reverse;
+}
+
+/* .port-enter-from,
+.port-leave-to {
+  transform: translateX(100%);
+    opacity: 0;
+} */
+
+@keyframes clip-in {
+  from{
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+  }
+  to{
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
 </style>

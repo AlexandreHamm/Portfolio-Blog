@@ -4,39 +4,31 @@ import Projects from '../components/portfolio/Projects.vue'
 </script>
 
 <template>
-  <main class="portfolio__block__projects">
-    <div class="portfolio__block__projects__scroll">
+    <Transition name="port" mode="out-in">
       <Projects />
-    </div>
-  </main>
+    </Transition>
 </template>
 
-<style lang="scss" scoped>
-.portfolio{
-
-  &__block{
-
-    &__projects{
-      display: none;
-      position: relative;
-      width: 50%;
-      height: 150px;
-      overflow: hidden;
-
-      &__scroll{
-        position: relative;
-        width: 150px;
-        height: 24vw;
-        overflow-y: scroll;
-        scroll-behavior: smooth;
-        overflow-x: hidden;
-        transform: rotate(-90deg) translateX(-100%);
-        transform-origin: top left;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-       }
+<style>
+    .port-enter-active {
+      animation: clip-in 1s ease-out;
     }
-  }
-}
+    .port-leave-active {
+      animation: clip-in 1s ease-out reverse;
+    }
+
+    /* .port-enter-from,
+    .port-leave-to {
+      transform: translateX(100%);
+        opacity: 0;
+    } */
+
+    @keyframes clip-in {
+      from{
+        clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+      }
+      to{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+    }
 </style>

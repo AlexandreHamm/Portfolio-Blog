@@ -1,11 +1,15 @@
 <script setup>
-import ContactMe from './ContactMe.vue';
+import ContactBtn from './elements/ContactBtn.vue';
+import ViewBtn from './elements/ViewBtn.vue'
 </script>
 
 <template>
-    <footer class="socials">
-        <ContactMe />
-        <div class="socials__links">
+    <footer>
+        <div class="btnBlock">
+            <ViewBtn />
+            <ContactBtn />
+        </div>
+        <div class="socials">
             <a href="https://www.linkedin.com/in/alexandre-hamm-a30545209/" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
             </a>
@@ -23,34 +27,49 @@ import ContactMe from './ContactMe.vue';
 </template>
 
 <style lang="scss" scoped>
-    .socials{
+    footer{
         position: absolute;
-        bottom: 2%;
+        bottom: 0;
         width: 100%;
-        height: calc(50px + 2%);
+        height: 90px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         overflow: hidden;
 
-        & > a{
-            font-family: inherit;
-            font-size: 1.8rem;
-            font-weight: 500;
-            letter-spacing: .5rem;
-            opacity: .5;
-            transform: translateY(150px);
-            transition: opacity .2s, letter-spacing .2s, transform 1s ease-out;
+        .btnBlock{
+            position: relative;
+            height: 50%;
+            display: flex;
+            align-items: center;
 
-            &:hover{
-                letter-spacing: .7rem;
-                opacity: 1;
-                transition: .2s;
+            & > a{
+                width: 112px;
+                text-align: left;
+                font-family: inherit;
+                font-size: 1.8rem;
+                font-weight: 500;
+                letter-spacing: .5rem;
+                opacity: .5;
+                // transform: translateY(150px);
+                transition: opacity .2s, letter-spacing .2s, transform 1s ease-out;
+
+                &:hover{
+                    letter-spacing: .7rem;
+                    opacity: 1;
+                    transition: .2s;
+                }
             }
+
+            & > a:last-child{
+                text-align: right;
+            }
+
         }
 
-        &__links{
+        .socials{
+            height: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -59,11 +78,12 @@ import ContactMe from './ContactMe.vue';
             & > a{
                 width: 50px;
                 height: 40px;
+                margin: 10px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                transform: translateY(150px);
+                // transform: translateY(150px);
                 opacity: .5;
                 transition: opacity .2s, transform 1.2s ease-out;
 

@@ -16,7 +16,7 @@ export default {
                     }
                     this.html = 'back'
                 }else{
-                    this.html = 'contact me',
+                    this.html = 'contact',
                     this.route = '/contact'
                 }
             }, 100);

@@ -46,16 +46,17 @@ function setCookie(name) {
 }
 </script>
 <template>
-    <div ref="contact">
+    <form ref="contact">
         <input type="text" placeholder="Name">
         <input type="email" placeholder="Email">
         <textarea placeholder="Message"></textarea>
         <button @click="sendMessage()">Send</button>
-    </div>
+    </form>
 </template>
 <style scoped>
-    div{
+    form{
         width: 50%;
+        max-width: 700px;
         height: 100%;
         display: flex;
         flex-direction: column;
