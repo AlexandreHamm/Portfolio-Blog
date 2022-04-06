@@ -91,8 +91,8 @@ export default {
 
 <template>
   <div class="wrapper" v-if="data && data.length">
-    <div class="project" v-for="project of data" :key="project.id">
-        <div class="test">
+    <div class="project" v-for="project of data.slice().reverse()" :key="project.id">
+        <div class="test" :class="project.title">
           <img src="../../projects/untitled-1.png" alt="" draggable="false">
         </div>
     </div>

@@ -37,6 +37,7 @@ import ViewBtn from './elements/ViewBtn.vue'
         justify-content: space-between;
         align-items: center;
         overflow: hidden;
+        mix-blend-mode: difference;
 
         .btnBlock{
             position: relative;
@@ -51,7 +52,7 @@ import ViewBtn from './elements/ViewBtn.vue'
                 font-size: 1.8rem;
                 font-weight: 500;
                 letter-spacing: .5rem;
-                opacity: .5;
+                opacity: .7;
                 // transform: translateY(150px);
                 transition: opacity .2s, letter-spacing .2s, transform 1s ease-out;
 
@@ -84,7 +85,7 @@ import ViewBtn from './elements/ViewBtn.vue'
                 justify-content: center;
                 align-items: center;
                 // transform: translateY(150px);
-                opacity: .5;
+                opacity: .7;
                 transition: opacity .2s, transform 1.2s ease-out;
 
                 & > svg{

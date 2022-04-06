@@ -41,11 +41,12 @@ export default {
       font-weight: 500;
       letter-spacing: 1px;
       font-family: 'Blackout';
-      color: #FFF;
-      opacity: .5;
+      color: transparent;
+      opacity: .7;
       transition: .2s;
       display: flex;
       overflow: hidden;
+      mix-blend-mode: difference;
 
       & > span{
         transform: translateY(150%);
